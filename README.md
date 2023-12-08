@@ -1,5 +1,7 @@
 ## Aftas Club Competition Management App
 
+![computer](https://github.com/mjidelouss/AFTAS/blob/main/aftas.jpeg)
+
 AFTAS Club is a sports club located in Tiznit, precisely in Mirleft, offering a range of services and activities including Surf, Tennis, Quad, Pêche sous-marine, Parapente, and more.
 The club regularly organizes spearfishing competitions in various regions of Morocco. Club members can participate in competitions by paying a participation fee.
 The club handles the logistics, defines a jury, calculates results, and displays the podium.
@@ -34,14 +36,14 @@ Aflas club aims to modernize its competition management by developing a responsi
 - Testing: Unit tests for the competition result calculation service.
 
 # Installation
-1- Clone the repository: git clone https://github.com/mjidelouss/AFTAS.git
-2- Navigate to the project directory: cd AFTAS
-3- (Include any specific setup steps, e.g., setting up the database, configuring application properties).
+- Clone the repository: git clone https://github.com/mjidelouss/AFTAS.git
+- Navigate to the project directory: cd AFTAS
+- (Include any specific setup steps, e.g., setting up the database, configuring application properties).
 
 # Usage
-1- Start the Spring Boot application.
-2- Start the Angular application.
-3- Access the application at http://localhost:8080.
+- Start the Spring Boot application.
+- Start the Angular application.
+- Access the application at http://localhost:8080.
 
 # API Endpoints
 /api/competitions (POST, GET)
@@ -57,11 +59,11 @@ Aflas club aims to modernize its competition management by developing a responsi
 - AdminInterfaceComponent: Component for the administration interface.
 
 # Contributing
-1- Fork the repository.
-2- Create a new branch: git checkout -b feature-name.
-3- Commit your changes: git commit -m 'Add new feature'.
-4- Push to the branch: git push origin feature-name.
-5- Open a pull request.
+- Fork the repository.
+- Create a new branch: git checkout -b feature-name.
+- Commit your changes: git commit -m 'Add new feature'.
+- Push to the branch: git push origin feature-name.
+- Open a pull request.
 
 # Testing
 - Run unit tests for the competition result calculation service.
