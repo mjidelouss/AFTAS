@@ -1,17 +1,28 @@
 package com.example.aftas.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Ranking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int rank;
-    private int score;
+    @Positive(message = "Rank must be Positive")
+    @NotNull(message = "Rank cannot be Null")
+    private Integer rank;
+    @PositiveOrZero(message = "Score must be Positive")
+    @NotNull(message = "Score cannot be Null")
+    private Integer score;
     @ManyToOne
+    @JoinColumn(name = "member_id")
+    @NotNull(message = "Member cannot be Null")
     private Member member;
     @ManyToOne
+    @JoinColumn(name = "competition_id")
+    @NotNull(message = "Competition cannot be Null")
     private Competition competition;
 
 }
