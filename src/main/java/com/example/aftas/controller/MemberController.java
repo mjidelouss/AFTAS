@@ -25,6 +25,7 @@ public class MemberController {
             return ResponseMessage.ok("Success", member);
         }
     }
+
     @PostMapping("")
     public ResponseEntity addMember(@RequestBody @Valid Member member) {
         Member member1 = memberService.addMember(member);
