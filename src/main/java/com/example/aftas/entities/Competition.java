@@ -57,5 +57,5 @@ public class Competition {
 
     @OneToMany(mappedBy = "competition")
     @Column(nullable = true)
-    private List<Ranking> rankings;
+    private List<Rank> ranks;
 }

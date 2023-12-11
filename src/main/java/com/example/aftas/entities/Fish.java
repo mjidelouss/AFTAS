@@ -1,7 +1,6 @@
 package com.example.aftas.entities;
 
 import jakarta.persistence.*;
-import com.example.aftas.entities.Level;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -33,7 +32,7 @@ public class Fish {
     private Double averageWeight;
 
     @OneToMany(mappedBy = "fish")
-    private List<Hunting> huntings;
+    private List<Hunt> hunts;
 
     @ManyToOne
     @NotNull(message = "Level Cannot Be Null")

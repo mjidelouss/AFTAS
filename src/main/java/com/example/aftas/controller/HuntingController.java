@@ -1,7 +1,6 @@
 package com.example.aftas.controller;
 
-import com.example.aftas.entities.Fish;
-import com.example.aftas.entities.Hunting;
+import com.example.aftas.entities.Hunt;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.HuntingService;
 import jakarta.validation.Valid;
@@ -19,51 +18,51 @@ public class HuntingController {
 
     @GetMapping("")
     public ResponseEntity getHuntings() {
-        List<Hunting> huntings = huntingService.getHuntings();
-        if (huntings.isEmpty()) {
+        List<Hunt> hunts = huntingService.getHuntings();
+        if (hunts.isEmpty()) {
             return ResponseMessage.notFound("Huntings Not Found");
         } else {
-            return ResponseMessage.ok("Success", huntings);
+            return ResponseMessage.ok("Success", hunts);
         }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getHuntingById(@PathVariable Long id) {
-        Hunting hunting = huntingService.getHuntingById(id);
-        if (hunting == null) {
+        Hunt hunt = huntingService.getHuntingById(id);
+        if (hunt == null) {
             return ResponseMessage.notFound("Hunting Not Found");
         } else {
-            return ResponseMessage.ok("Success", hunting);
+            return ResponseMessage.ok("Success", hunt);
         }
     }
 
     @PostMapping("")
-    public ResponseEntity addHunting(@RequestBody @Valid Hunting hunting) {
-        Hunting hunting1 = huntingService.addHunting(hunting);
-        if(hunting1 == null) {
+    public ResponseEntity addHunting(@RequestBody @Valid Hunt hunt) {
+        Hunt hunt1 = huntingService.addHunting(hunt);
+        if(hunt1 == null) {
             return ResponseMessage.badRequest("Failed To Create Hunting");
         } else {
-            return ResponseMessage.created("Hunting Created Successfully", hunting1);
+            return ResponseMessage.created("Hunting Created Successfully", hunt1);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateHunting(@RequestBody Hunting hunting, @PathVariable Long id) {
-        Hunting hunting1 = huntingService.updateHunting(hunting, id);
-        if (hunting1 == null) {
+    public ResponseEntity updateHunting(@RequestBody Hunt hunt, @PathVariable Long id) {
+        Hunt hunt1 = huntingService.updateHunting(hunt, id);
+        if (hunt1 == null) {
             return ResponseMessage.badRequest("Hunting Not Updated");
         } else {
-            return ResponseMessage.created("Hunting Updated Successfully", hunting1);
+            return ResponseMessage.created("Hunting Updated Successfully", hunt1);
         }
     }
     @DeleteMapping("/{id}")
     public ResponseEntity deleteHunting(@PathVariable Long id) {
-        Hunting hunting = huntingService.getHuntingById(id);
-        if (hunting == null) {
+        Hunt hunt = huntingService.getHuntingById(id);
+        if (hunt == null) {
             return ResponseMessage.notFound("Hunting Not Found");
         } else {
             huntingService.deleteHunting(id);
-            return ResponseMessage.ok("Hunting Deleted Successfully", hunting);
+            return ResponseMessage.ok("Hunting Deleted Successfully", hunt);
         }
     }
 }

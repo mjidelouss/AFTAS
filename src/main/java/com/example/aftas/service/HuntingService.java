@@ -1,17 +1,17 @@
 package com.example.aftas.service;
 
-import com.example.aftas.entities.Hunting;
+import com.example.aftas.entities.Hunt;
 
 import java.util.List;
 
 public interface HuntingService {
-    Hunting getHuntingById(Long id);
+    Hunt getHuntingById(Long id);
 
-    Hunting addHunting(Hunting hunting);
+    Hunt addHunting(Hunt hunt);
 
-    Hunting updateHunting(Hunting hunting, Long id);
+    Hunt updateHunting(Hunt hunt, Long id);
 
     void deleteHunting(Long id);
 
-    List<Hunting> getHuntings();
+    List<Hunt> getHuntings();
 }

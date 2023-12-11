@@ -2,7 +2,6 @@ package com.example.aftas.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
@@ -12,7 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class Hunting {
+public class Hunt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

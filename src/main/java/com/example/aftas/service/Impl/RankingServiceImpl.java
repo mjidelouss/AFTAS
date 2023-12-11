@@ -1,6 +1,6 @@
 package com.example.aftas.service.Impl;
 
-import com.example.aftas.entities.Ranking;
+import com.example.aftas.entities.Rank;
 import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
@@ -14,21 +14,21 @@ public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
     @Override
-    public Ranking getRankingById(Long id) {
+    public Rank getRankingById(Long id) {
         return rankingRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Ranking addRanking(Ranking ranking) {
-        return rankingRepository.save(ranking);
+    public Rank addRanking(Rank rank) {
+        return rankingRepository.save(rank);
     }
 
     @Override
-    public Ranking updateRanking(Ranking ranking, Long id) {
-        Ranking existingRanking = getRankingById(id);
-        existingRanking.setRank(ranking.getRank());
-        existingRanking.setScore(ranking.getScore());
-        return rankingRepository.save(existingRanking);
+    public Rank updateRanking(Rank rank, Long id) {
+        Rank existingRank = getRankingById(id);
+        existingRank.setRank(rank.getRank());
+        existingRank.setScore(rank.getScore());
+        return rankingRepository.save(existingRank);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public List<Ranking> getRankings() {
+    public List<Rank> getRankings() {
         return rankingRepository.findAll();
     }
 }

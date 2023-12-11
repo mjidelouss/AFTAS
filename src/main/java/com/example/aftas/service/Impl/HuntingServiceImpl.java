@@ -1,6 +1,7 @@
 package com.example.aftas.service.Impl;
 
-import com.example.aftas.entities.Hunting;
+import com.example.aftas.entities.Fish;
+import com.example.aftas.entities.Hunt;
 import com.example.aftas.repository.HuntingRepository;
 import com.example.aftas.service.HuntingService;
 import lombok.RequiredArgsConstructor;
@@ -15,20 +16,28 @@ public class HuntingServiceImpl implements HuntingService {
     private final HuntingRepository huntingRepository;
 
     @Override
-    public Hunting getHuntingById(Long id) {
+    public Hunt getHuntingById(Long id) {
         return huntingRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Hunting addHunting(Hunting hunting) {
-        return huntingRepository.save(hunting);
+    public Hunt addHunting(Hunt hunt) {
+        String fishName = hunt.getFish().getName();
+        Hunt existingHunt = huntingRepository.findByFish_NameAndMember_Id(fishName, hunt.getMember().getId());
+
+        if (existingHunt != null) {
+            existingHunt.setNumberOfFish(existingHunt.getNumberOfFish() + hunt.getNumberOfFish());
+            return huntingRepository.save(existingHunt);
+        } else {
+            return huntingRepository.save(hunt);
+        }
     }
 
     @Override
-    public Hunting updateHunting(Hunting hunting, Long id) {
-        Hunting existingHunting = getHuntingById(id);
-        existingHunting.setNumberOfFish(hunting.getNumberOfFish());
-        return huntingRepository.save(existingHunting);
+    public Hunt updateHunting(Hunt hunt, Long id) {
+        Hunt existingHunt = getHuntingById(id);
+        existingHunt.setNumberOfFish(hunt.getNumberOfFish());
+        return huntingRepository.save(existingHunt);
     }
 
     @Override
@@ -37,7 +46,13 @@ public class HuntingServiceImpl implements HuntingService {
     }
 
     @Override
-    public List<Hunting> getHuntings() {
+    public List<Hunt> getHuntings() {
         return huntingRepository.findAll();
+    }
+
+    public void validateFishWeight(Hunt hunt, Double huntedWeight) {
+        if (huntedWeight < hunt.getFish().getAverageWeight()) {
+            throw new IllegalArgumentException("Hunted weight must be equal or greater than average weight");
+        }
     }
 }

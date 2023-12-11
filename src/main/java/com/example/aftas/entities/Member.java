@@ -54,9 +54,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     @Column(nullable = true)
-    private List<Ranking> rankings;
+    private List<Rank> ranks;
 
     @OneToMany(mappedBy = "member")
-    private List<Hunting> huntings;
+    private List<Hunt> hunts;
 
 }

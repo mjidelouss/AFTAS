@@ -1,17 +1,17 @@
 package com.example.aftas.service;
 
-import com.example.aftas.entities.Ranking;
+import com.example.aftas.entities.Rank;
 
 import java.util.List;
 
 public interface RankingService {
-    Ranking getRankingById(Long id);
+    Rank getRankingById(Long id);
 
-    Ranking addRanking(Ranking ranking);
+    Rank addRanking(Rank rank);
 
-    Ranking updateRanking(Ranking ranking, Long id);
+    Rank updateRanking(Rank rank, Long id);
 
     void deleteRanking(Long id);
 
-    List<Ranking> getRankings();
+    List<Rank> getRankings();
 }
