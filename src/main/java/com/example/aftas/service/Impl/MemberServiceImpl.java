@@ -23,8 +23,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> searchMember(String name) {
-        return memberRepository.findByName(name);
+    public List<Member> searchMember(String searchTerm) {
+        return memberRepository.findByMembershipNumberOrNameOrFamilyName(searchTerm);
     }
 
     @Override

@@ -32,6 +32,10 @@ public class Member {
     @Pattern(regexp = "^[a-zA-Z]+$", message = "Family name must only contain letters")
     private String familyName;
 
+    @NotNull(message = "Membership Number must not be Null")
+    @Positive(message = "Membership Number Must Be Positive")
+    private Integer membershipNumber;
+
     @NotNull(message = "Access Date must not be Null")
     @PastOrPresent(message = "Access Date must be in the past or the present")
     @Temporal(TemporalType.DATE)

@@ -49,8 +49,8 @@ public class MemberController {
     }
 
     @GetMapping("")
-    public ResponseEntity searchMember(@RequestBody String name) {
-        List<Member> members = memberService.searchMember(name);
+    public ResponseEntity searchMember(@RequestBody String searchTerm) {
+        List<Member> members = memberService.searchMember(searchTerm);
         if (members.isEmpty()) {
             return ResponseMessage.notFound("Member Not Found");
         } else {
