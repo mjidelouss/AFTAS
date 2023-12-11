@@ -1,7 +1,6 @@
 package com.example.aftas.service.Impl;
 
 import com.example.aftas.entities.Fish;
-import com.example.aftas.entities.Member;
 import com.example.aftas.repository.FishRepository;
 import com.example.aftas.service.FishService;
 import lombok.RequiredArgsConstructor;
