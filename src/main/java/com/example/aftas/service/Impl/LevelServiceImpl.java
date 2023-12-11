@@ -6,6 +6,8 @@ import com.example.aftas.service.LevelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LevelServiceImpl implements LevelService {
@@ -33,5 +35,10 @@ public class LevelServiceImpl implements LevelService {
     @Override
     public void deleteLevel(Long id) {
         levelRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Level> getLevels() {
+        return levelRepository.findAll();
     }
 }

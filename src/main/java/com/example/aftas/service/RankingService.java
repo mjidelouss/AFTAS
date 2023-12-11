@@ -2,6 +2,8 @@ package com.example.aftas.service;
 
 import com.example.aftas.entities.Ranking;
 
+import java.util.List;
+
 public interface RankingService {
     Ranking getRankingById(Long id);
 
@@ -10,4 +12,6 @@ public interface RankingService {
     Ranking updateRanking(Ranking ranking, Long id);
 
     void deleteRanking(Long id);
+
+    List<Ranking> getRankings();
 }

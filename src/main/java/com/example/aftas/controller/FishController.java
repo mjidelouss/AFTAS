@@ -1,5 +1,6 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Fish;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.FishService;
@@ -15,6 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FishController {
     private final FishService fishService;
+
+    @GetMapping("")
+    public ResponseEntity getFishes() {
+        List<Fish> fishes = fishService.getFishes();
+        if (fishes.isEmpty()) {
+            return ResponseMessage.notFound("Fishes Not Found");
+        } else {
+            return ResponseMessage.ok("Success", fishes);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity getFishById(@PathVariable Long id) {

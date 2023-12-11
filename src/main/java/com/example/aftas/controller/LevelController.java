@@ -1,5 +1,6 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Level;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.LevelService;
@@ -8,12 +9,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/level")
 @RequiredArgsConstructor
 public class LevelController {
 
     private final LevelService levelService;
+
+    @GetMapping("")
+    public ResponseEntity getLevels() {
+        List<Level> levels = levelService.getLevels();
+        if (levels.isEmpty()) {
+            return ResponseMessage.notFound("Levels Not Found");
+        } else {
+            return ResponseMessage.ok("Success", levels);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity getLevelById(@PathVariable Long id) {

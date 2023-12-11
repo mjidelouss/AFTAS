@@ -6,6 +6,8 @@ import com.example.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RankingServiceImpl implements RankingService {
@@ -32,5 +34,10 @@ public class RankingServiceImpl implements RankingService {
     @Override
     public void deleteRanking(Long id) {
         rankingRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Ranking> getRankings() {
+        return rankingRepository.findAll();
     }
 }

@@ -8,12 +8,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/competition")
 @RequiredArgsConstructor
 public class CompetitionController {
 
     private final CompetitionService competitionService;
+
+    @GetMapping("")
+    public ResponseEntity getCompetitions() {
+        List<Competition> competitions = competitionService.getCompetitions();
+        if (competitions.isEmpty()) {
+            return ResponseMessage.notFound("Competitions Not Found");
+        } else {
+            return ResponseMessage.ok("Success", competitions);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity getCompetitionById(@PathVariable Long id) {

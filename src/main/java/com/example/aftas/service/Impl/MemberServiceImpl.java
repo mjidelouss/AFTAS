@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
+
     private final MemberRepository memberRepository;
     @Override
     public Member getMemberById(Long id) {
@@ -41,5 +42,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Member> getMembers() {
+        return memberRepository.findAll();
     }
 }

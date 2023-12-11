@@ -1,5 +1,6 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Member;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.MemberService;
@@ -14,7 +15,18 @@ import java.util.List;
 @RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
+
     private final MemberService memberService;
+
+    @GetMapping("")
+    public ResponseEntity getMembers() {
+        List<Member> members = memberService.getMembers();
+        if (members.isEmpty()) {
+            return ResponseMessage.notFound("Members Not Found");
+        } else {
+            return ResponseMessage.ok("Success", members);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity getMemberById(@PathVariable Long id) {

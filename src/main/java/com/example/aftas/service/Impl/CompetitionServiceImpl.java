@@ -6,6 +6,8 @@ import com.example.aftas.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CompetitionServiceImpl implements CompetitionService {
@@ -38,5 +40,10 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Override
     public void deleteCompetition(Long id) {
         competitionRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Competition> getCompetitions() {
+        return competitionRepository.findAll();
     }
 }

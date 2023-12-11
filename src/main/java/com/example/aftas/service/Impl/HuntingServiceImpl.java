@@ -6,9 +6,12 @@ import com.example.aftas.service.HuntingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class HuntingServiceImpl implements HuntingService {
+
     private final HuntingRepository huntingRepository;
 
     @Override
@@ -31,5 +34,10 @@ public class HuntingServiceImpl implements HuntingService {
     @Override
     public void deleteHunting(Long id) {
         huntingRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Hunting> getHuntings() {
+        return huntingRepository.findAll();
     }
 }
