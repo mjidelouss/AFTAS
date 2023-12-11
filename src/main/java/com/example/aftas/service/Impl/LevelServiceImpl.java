@@ -20,11 +20,13 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public Level addLevel(Level level) {
+        validateLevel(level);
         return levelRepository.save(level);
     }
 
     @Override
     public Level updateLevel(Level level, Long id) {
+        validateLevelInUpdate(level);
         Level existingLevel = getLevelById(id);
         existingLevel.setLevel(level.getLevel());
         existingLevel.setDescription(level.getDescription());
@@ -40,5 +42,31 @@ public class LevelServiceImpl implements LevelService {
     @Override
     public List<Level> getLevels() {
         return levelRepository.findAll();
+    }
+
+    public void validateLevel(Level newLevel) {
+        Integer maxLevel = levelRepository.findMaxLevel();
+        Integer maxPoints = levelRepository.findMaxPoints();
+        Level level = levelRepository.findByLevel(newLevel.getLevel());
+
+        if (level != null) {
+            throw new IllegalArgumentException("Level already exists");
+        }
+        if (maxLevel != null && maxPoints != null && !(newLevel.getLevel() == maxLevel + 1 && newLevel.getPoints() > maxPoints)) {
+            throw new IllegalArgumentException("Invalid level or points");
+        }
+    }
+
+    public void validateLevelInUpdate(Level updatedLevel) {
+        validateLevel(updatedLevel);
+        Level previousLevel = levelRepository.findByLevel(updatedLevel.getLevel() - 1);
+        Level nextLevel = levelRepository.findByLevel(updatedLevel.getLevel() + 1);
+
+        if (previousLevel != null && updatedLevel.getPoints() <= previousLevel.getPoints()) {
+            throw new IllegalArgumentException("Points must be higher than the previous level");
+        }
+        if (nextLevel != null && updatedLevel.getPoints() >= nextLevel.getPoints()) {
+            throw new IllegalArgumentException("Points must be lower than the next level");
+        }
     }
 }
