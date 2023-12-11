@@ -6,6 +6,8 @@ import com.example.aftas.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -16,6 +18,7 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public Competition addCompetition(Competition competition) {
+        competition.setCode(generateCompetitionCode(competition));
         return competitionRepository.save(competition);
     }
 
@@ -45,5 +48,20 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Override
     public List<Competition> getCompetitions() {
         return competitionRepository.findAll();
+    }
+
+    public String generateCompetitionCode(Competition competition) {
+        String locationCode = competition.getLocation().substring(0, 3).toLowerCase();
+        String dateCode = competition.getDate().format(DateTimeFormatter.ofPattern("yy-MM-dd"));
+        return locationCode + "-" + dateCode;
+    }
+
+    public void validateCompetitionDate(Competition newCompetition) {
+        LocalDate competitionDate = newCompetition.getDate();
+        List<Competition> existingCompetitionsOnDate = competitionRepository.findByDate(competitionDate);
+
+        if (!existingCompetitionsOnDate.isEmpty()) {
+            throw new IllegalArgumentException("Another competition already exists on the same date");
+        }
     }
 }
