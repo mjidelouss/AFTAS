@@ -1,7 +1,6 @@
 package com.example.aftas.controller;
 
 import com.example.aftas.entities.Fish;
-import com.example.aftas.entities.Member;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.FishService;
 import jakarta.validation.Valid;
