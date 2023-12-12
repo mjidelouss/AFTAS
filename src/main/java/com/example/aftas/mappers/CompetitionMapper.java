@@ -7,10 +7,26 @@ import com.example.aftas.entities.Competition;
 public class CompetitionMapper {
 
     public static Competition mapCompetitionRequestToCompetition(CompetitionRequest competitionRequest) {
-
+        return new Competition().builder()
+                .code(competitionRequest.getCode())
+                .amount(competitionRequest.getAmount())
+                .date(competitionRequest.getDate())
+                .startTime(competitionRequest.getStartTime())
+                .endTime(competitionRequest.getEndTime())
+                .location(competitionRequest.getLocation())
+                .totalParticipants(competitionRequest.getTotalParticipants())
+                .build();
     }
 
     public static CompetitionResponse mapCompetitionToCompetitionResponse(Competition competition) {
-
+        return new CompetitionResponse().builder()
+                .code(competition.getCode())
+                .amount(competition.getAmount())
+                .date(competition.getDate())
+                .startTime(competition.getStartTime())
+                .endTime(competition.getEndTime())
+                .location(competition.getLocation())
+                .totalParticipants(competition.getTotalParticipants())
+                .build();
     }
 }
