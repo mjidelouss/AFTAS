@@ -3,7 +3,9 @@ package com.example.aftas.VMs.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Data;
 
+@Data
 public class LevelRequest {
     @NotNull(message = "Level Cannot Be Null")
     @Positive(message = "Level Must Be Positive")

@@ -5,7 +5,9 @@ import com.example.aftas.entities.Member;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Data;
 
+@Data
 public class HuntingRequest {
 
     @NotNull(message = "Number Of Fish Cannot Be Null")

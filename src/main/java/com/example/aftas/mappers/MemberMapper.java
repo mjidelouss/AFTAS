@@ -22,6 +22,6 @@ public class MemberMapper {
                 .name(member.getName())
                 .familyName(member.getFamilyName())
                 .nationality(member.getNationality())
-                .build()
+                .build();
     }
 }

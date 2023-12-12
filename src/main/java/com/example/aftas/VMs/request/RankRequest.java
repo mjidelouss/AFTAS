@@ -4,7 +4,9 @@ import com.example.aftas.entities.Member;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Data;
 
+@Data
 public class RankRequest {
     @Positive(message = "Rank must be Positive")
     @NotNull(message = "Rank cannot be Null")
