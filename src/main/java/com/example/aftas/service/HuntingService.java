@@ -7,7 +7,7 @@ import java.util.List;
 public interface HuntingService {
     Hunt getHuntingById(Long id);
 
-    Hunt addHunting(Hunt hunt);
+    Hunt addHunting(Hunt hunt, Double huntedWeight);
 
     Hunt updateHunting(Hunt hunt, Long id);
 

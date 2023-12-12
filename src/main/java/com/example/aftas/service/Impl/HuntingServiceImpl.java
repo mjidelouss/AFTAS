@@ -1,9 +1,10 @@
 package com.example.aftas.service.Impl;
 
-import com.example.aftas.entities.Fish;
-import com.example.aftas.entities.Hunt;
+import com.example.aftas.entities.*;
 import com.example.aftas.repository.HuntingRepository;
+import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.HuntingService;
+import com.example.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class HuntingServiceImpl implements HuntingService {
 
     private final HuntingRepository huntingRepository;
+    private final RankingService rankingService;
 
     @Override
     public Hunt getHuntingById(Long id) {
@@ -21,16 +23,18 @@ public class HuntingServiceImpl implements HuntingService {
     }
 
     @Override
-    public Hunt addHunting(Hunt hunt) {
+    public Hunt addHunting(Hunt hunt, Double huntedWeight) {
         String fishName = hunt.getFish().getName();
         Hunt existingHunt = huntingRepository.findByFish_NameAndMember_Id(fishName, hunt.getMember().getId());
-
+        validateFishWeight(hunt, huntedWeight);
         if (existingHunt != null) {
             existingHunt.setNumberOfFish(existingHunt.getNumberOfFish() + hunt.getNumberOfFish());
-            return huntingRepository.save(existingHunt);
+            huntingRepository.save(existingHunt);
         } else {
-            return huntingRepository.save(hunt);
+            huntingRepository.save(hunt);
         }
+        rankingService.updateRankScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish().getLevel().getPoints());
+        return hunt;
     }
 
     @Override
