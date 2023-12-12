@@ -7,10 +7,18 @@ import com.example.aftas.entities.Level;
 public class LevelMapper {
 
     public static Level mapLevelRequestToMapper(LevelRequest levelRequest) {
-
+        return new Level().builder()
+                .level(levelRequest.getLevel())
+                .points(levelRequest.getPoints())
+                .description(levelRequest.getDescription())
+                .build();
     }
 
     public static LevelResponse mapLevelToLevelResponse(Level level) {
-
+        return new LevelResponse().builder()
+                .level(level.getLevel())
+                .points(level.getPoints())
+                .description(level.getDescription())
+                .build();
     }
 }
