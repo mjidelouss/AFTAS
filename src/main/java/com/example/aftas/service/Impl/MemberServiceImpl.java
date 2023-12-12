@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
     public Member updateMember(Member member, Long id) {
         Member existingMember = getMemberById(id);
         existingMember.setName(member.getName());
+        existingMember.setMembershipNumber(member.getMembershipNumber());
         existingMember.setFamilyName(member.getFamilyName());
         existingMember.setAccessDate(member.getAccessDate());
         existingMember.setNationality(member.getNationality());
