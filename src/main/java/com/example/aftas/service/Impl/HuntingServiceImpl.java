@@ -2,7 +2,6 @@ package com.example.aftas.service.Impl;
 
 import com.example.aftas.entities.*;
 import com.example.aftas.repository.HuntingRepository;
-import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.HuntingService;
 import com.example.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,7 @@ public class HuntingServiceImpl implements HuntingService {
         } else {
             huntingRepository.save(hunt);
         }
-        rankingService.updateRankScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish().getLevel().getPoints());
+        rankingService.updateRankScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish());
         return hunt;
     }
 

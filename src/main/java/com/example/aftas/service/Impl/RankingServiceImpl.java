@@ -65,4 +65,8 @@ public class RankingServiceImpl implements RankingService {
         }
     }
 
+    public List<Rank> getPodium(Competition competition) {
+        return rankingRepository.findTop3ByCompetitionOrderByRank(competition);
+    }
+
 }
