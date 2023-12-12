@@ -1,5 +1,6 @@
 package com.example.aftas.VMs.request;
 
+import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Member;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -18,4 +19,7 @@ public class RankRequest {
 
     @NotNull(message = "Member cannot be Null")
     private Member member;
+
+    @NotNull(message = "Competition cannot be Null")
+    private Competition competition;
 }

@@ -1,8 +1,8 @@
 package com.example.aftas.VMs.request;
 
+import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Member;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
@@ -17,4 +17,6 @@ public class HuntingRequest {
     private Member member;
     @NotNull(message = "Fish Cannot Be Null")
     private Fish fish;
+    @NotNull(message = "Competition cannot be Null")
+    private Competition competition;
 }
