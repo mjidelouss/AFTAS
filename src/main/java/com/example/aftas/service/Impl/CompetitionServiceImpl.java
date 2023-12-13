@@ -77,7 +77,4 @@ public class CompetitionServiceImpl implements CompetitionService {
         }
     }
 
-    public void registerMemberToCompetition(Member member, Competition competition) {
-
-    }
 }

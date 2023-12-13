@@ -12,5 +12,9 @@ public interface RankingService {
     Rank addRanking(Rank rank);
     List<Rank> getRankings();
     void updateScore(Member member, Competition competition, Fish fish);
+    void registerMemberToCompetition(Member member, Competition competition);
 
+    List<Rank> getPodium(Competition competition);
+
+    void updateRankingOrder(Competition competition);
 }

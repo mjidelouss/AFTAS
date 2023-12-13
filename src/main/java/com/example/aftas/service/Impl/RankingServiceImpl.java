@@ -55,4 +55,20 @@ public class RankingServiceImpl implements RankingService {
         return rankingRepository.findTop3ByCompetitionOrderByRank(competition);
     }
 
+    public void registerMemberToCompetition(Member member, Competition competition) {
+        // Check if the member is already registered for the competition
+        Rank existingRank = rankingRepository.findByMemberAndCompetition(member, competition);
+        if (existingRank == null) {
+            // Create a new Rank for the member and the competition
+            Rank newRank = new Rank();
+            newRank.setMember(member);
+            newRank.setCompetition(competition);
+            newRank.setScore(0);
+            newRank.setRank(0);
+            rankingRepository.save(newRank);
+        } else {
+            throw new IllegalStateException("Member is already registered for the competition");
+        }
+    }
+
 }
