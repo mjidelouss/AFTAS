@@ -1,7 +1,9 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.VMs.request.MemberRequest;
 import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Member;
+import com.example.aftas.mappers.MemberMapper;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.MemberService;
 import jakarta.validation.Valid;
@@ -18,7 +20,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("")
+    @GetMapping("/all")
     public ResponseEntity getMembers() {
         List<Member> members = memberService.getMembers();
         if (members.isEmpty()) {
@@ -39,7 +41,8 @@ public class MemberController {
     }
 
     @PostMapping("")
-    public ResponseEntity addMember(@RequestBody @Valid Member member) {
+    public ResponseEntity addMember(@RequestBody @Valid MemberRequest memberRequest) {
+        Member member = MemberMapper.mapMemberRequestToMember(memberRequest);
         Member member1 = memberService.addMember(member);
         if(member1 == null) {
             return ResponseMessage.badRequest("Failed To Create Member");
@@ -49,7 +52,7 @@ public class MemberController {
     }
 
     @GetMapping("")
-    public ResponseEntity searchMember(@RequestBody String searchTerm) {
+    public ResponseEntity searchMember(@RequestParam String searchTerm) {
         List<Member> members = memberService.searchMember(searchTerm);
         if (members.isEmpty()) {
             return ResponseMessage.notFound("Member Not Found");
@@ -57,8 +60,10 @@ public class MemberController {
             return ResponseMessage.ok("Success", members);
         }
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity updateMember(@RequestBody Member member, @PathVariable Long id) {
+    public ResponseEntity updateMember(@RequestBody @Valid MemberRequest memberRequest, @PathVariable Long id) {
+        Member member = MemberMapper.mapMemberRequestToMember(memberRequest);
         Member member1 = memberService.updateMember(member, id);
         if (member1 == null) {
             return ResponseMessage.badRequest("Member Not Updated");

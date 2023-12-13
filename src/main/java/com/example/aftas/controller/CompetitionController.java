@@ -1,6 +1,8 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.VMs.request.CompetitionRequest;
 import com.example.aftas.entities.Competition;
+import com.example.aftas.mappers.CompetitionMapper;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
 import jakarta.validation.Valid;
@@ -38,7 +40,8 @@ public class CompetitionController {
     }
 
     @PostMapping("")
-    public ResponseEntity addCompetition(@RequestBody @Valid Competition competition) {
+    public ResponseEntity addCompetition(@RequestBody @Valid CompetitionRequest competitionRequest) {
+        Competition competition = CompetitionMapper.mapCompetitionRequestToCompetition(competitionRequest);
         Competition competition1 = competitionService.addCompetition(competition);
         if(competition1 == null) {
             return ResponseMessage.badRequest("Failed To Create Competition");
@@ -48,7 +51,8 @@ public class CompetitionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateCompetition(@RequestBody Competition competition, @PathVariable Long id) {
+    public ResponseEntity updateCompetition(@RequestBody @Valid CompetitionRequest competitionRequest, @PathVariable Long id) {
+        Competition competition = CompetitionMapper.mapCompetitionRequestToCompetition(competitionRequest);
         Competition competition1 = competitionService.updateCompetition(competition, id);
         if (competition1 == null) {
             return ResponseMessage.badRequest("Competition Not Updated");

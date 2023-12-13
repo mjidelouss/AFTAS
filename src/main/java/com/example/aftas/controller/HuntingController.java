@@ -1,6 +1,8 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.VMs.request.HuntingRequest;
 import com.example.aftas.entities.Hunt;
+import com.example.aftas.mappers.HuntMapper;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.HuntingService;
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HuntingController {
     private final HuntingService huntingService;
+    private final HuntMapper huntMapper;
 
     @GetMapping("")
     public ResponseEntity getHuntings() {
@@ -37,8 +40,9 @@ public class HuntingController {
     }
 
     @PostMapping("")
-    public ResponseEntity addHunting(@RequestBody @Valid Hunt hunt) {
-        Hunt hunt1 = huntingService.addHunting(hunt);
+    public ResponseEntity addHunting(@RequestBody @Valid HuntingRequest huntingRequest) {
+        Hunt hunt = huntMapper.mapHuntRequestToHunt(huntingRequest);
+        Hunt hunt1 = huntingService.addHunting(hunt, huntingRequest.getHuntWeight());
         if(hunt1 == null) {
             return ResponseMessage.badRequest("Failed To Create Hunting");
         } else {
@@ -47,7 +51,8 @@ public class HuntingController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateHunting(@RequestBody Hunt hunt, @PathVariable Long id) {
+    public ResponseEntity updateHunting(@RequestBody HuntingRequest huntingRequest, @PathVariable Long id) {
+        Hunt hunt = huntMapper.mapHuntRequestToHunt(huntingRequest);
         Hunt hunt1 = huntingService.updateHunting(hunt, id);
         if (hunt1 == null) {
             return ResponseMessage.badRequest("Hunting Not Updated");

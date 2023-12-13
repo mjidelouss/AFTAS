@@ -12,11 +12,6 @@ import java.time.LocalTime;
 
 @Data
 public class CompetitionRequest {
-
-    @NotNull(message = "Code Cannot be Null")
-    @NotBlank(message = "Code Cannot be Blank")
-    private String code;
-
     @NotNull(message = "Date Cannot Be Null")
     @Future(message = "Date Must Be in the Future")
     private LocalDate date;
@@ -38,7 +33,4 @@ public class CompetitionRequest {
     @NotNull(message = "Amount Cannot be Null")
     @Positive(message = "Amount Must Be Positive")
     private Double amount;
-
-    @NotNull(message = "Status Cannot be Null")
-    private CompetitionStatus status;
 }

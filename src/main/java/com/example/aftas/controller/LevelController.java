@@ -1,7 +1,9 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.VMs.request.LevelRequest;
 import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Level;
+import com.example.aftas.mappers.LevelMapper;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.LevelService;
 import jakarta.validation.Valid;
@@ -39,7 +41,8 @@ public class LevelController {
     }
 
     @PostMapping("")
-    public ResponseEntity addLevel(@RequestBody @Valid Level level) {
+    public ResponseEntity addLevel(@RequestBody @Valid LevelRequest levelRequest) {
+        Level level = LevelMapper.mapLevelRequestToMapper(levelRequest);
         Level level1 = levelService.addLevel(level);
         if(level1 == null) {
             return ResponseMessage.badRequest("Failed To Create Level");
@@ -49,7 +52,8 @@ public class LevelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateLevel(@RequestBody Level level, @PathVariable Long id) {
+    public ResponseEntity updateLevel(@RequestBody @Valid LevelRequest levelRequest, @PathVariable Long id) {
+        Level level = LevelMapper.mapLevelRequestToMapper(levelRequest);
         Level level1 = levelService.updateLevel(level, id);
         if (level1 == null) {
             return ResponseMessage.badRequest("Level Not Updated");

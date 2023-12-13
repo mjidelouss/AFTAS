@@ -1,3 +1,4 @@
+/*
 package com.example.aftas.config;
 
 import jakarta.servlet.*;
@@ -21,4 +22,4 @@ public class CorsConfig implements Filter {
 
         filterChain.doFilter(req, res);
     }
-}
+}*/

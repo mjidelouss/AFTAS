@@ -3,23 +3,24 @@ package com.example.aftas.mappers;
 import com.example.aftas.VMs.request.CompetitionRequest;
 import com.example.aftas.VMs.response.CompetitionResponse;
 import com.example.aftas.entities.Competition;
+import com.example.aftas.enums.CompetitionStatus;
 
 public class CompetitionMapper {
 
     public static Competition mapCompetitionRequestToCompetition(CompetitionRequest competitionRequest) {
-        return new Competition().builder()
-                .code(competitionRequest.getCode())
+        return Competition.builder()
                 .amount(competitionRequest.getAmount())
                 .date(competitionRequest.getDate())
                 .startTime(competitionRequest.getStartTime())
                 .endTime(competitionRequest.getEndTime())
                 .location(competitionRequest.getLocation())
                 .totalParticipants(competitionRequest.getTotalParticipants())
+                .status(CompetitionStatus.OPEN)
                 .build();
     }
 
     public static CompetitionResponse mapCompetitionToCompetitionResponse(Competition competition) {
-        return new CompetitionResponse().builder()
+        return CompetitionResponse.builder()
                 .code(competition.getCode())
                 .amount(competition.getAmount())
                 .date(competition.getDate())

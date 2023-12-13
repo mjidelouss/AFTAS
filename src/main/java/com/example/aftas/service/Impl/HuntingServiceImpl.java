@@ -32,7 +32,7 @@ public class HuntingServiceImpl implements HuntingService {
         } else {
             huntingRepository.save(hunt);
         }
-        rankingService.updateRankScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish());
+        rankingService.updateScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish());
         return hunt;
     }
 

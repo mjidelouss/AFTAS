@@ -16,10 +16,6 @@ import java.util.List;
 public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
-    @Override
-    public Rank getRankingById(Long id) {
-        return rankingRepository.findById(id).orElse(null);
-    }
 
     @Override
     public Rank addRanking(Rank rank) {
@@ -27,34 +23,24 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public Rank updateRanking(Rank rank, Long id) {
-        Rank existingRank = getRankingById(id);
-        existingRank.setRank(rank.getRank());
-        existingRank.setScore(rank.getScore());
-        return rankingRepository.save(existingRank);
-    }
-
-    @Override
-    public void deleteRanking(Long id) {
-        rankingRepository.deleteById(id);
-    }
-
-    @Override
     public List<Rank> getRankings() {
         return rankingRepository.findAll();
     }
 
-    public void updateRankScore(Member member, Competition competition, Fish fish) {
+    public void updateScore(Member member, Competition competition, Fish fish) {
         Rank rank = rankingRepository.findByMemberAndCompetition(member, competition);
         if (rank == null) {
+            rank = new Rank();
             rank.setMember(member);
             rank.setCompetition(competition);
+            rank.setScore(0);
+            rank.setRank(0);
         }
         int newScore = rank.getScore() + fish.getLevel().getPoints();
         rank.setScore(newScore);
-        rankingRepository.save(rank);
-        updateRankingOrder(competition);
+        addRanking(rank);
     }
+
     private void updateRankingOrder(Competition competition) {
         List<Rank> ranks = rankingRepository.findByCompetitionOrderByScoreDesc(competition);
 

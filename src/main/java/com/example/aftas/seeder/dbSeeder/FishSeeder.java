@@ -20,12 +20,12 @@ public class FishSeeder {
             Fish.builder().name("Carp").averageWeight(3.0).level(Level.builder().level(3).build()).build(),
             Fish.builder().name("Cod").averageWeight(2.0).level(Level.builder().level(2).build()).build(),
             Fish.builder().name("Haddock").averageWeight(1.5).level(Level.builder().level(2).build()).build(),
-            Fish.builder().name("Red Snapper").averageWeight(2.0).level(Level.builder().level(2).build()).build(),
+            Fish.builder().name("RedSnapper").averageWeight(2.0).level(Level.builder().level(2).build()).build(),
             Fish.builder().name("Snapper").averageWeight(2.5).level(Level.builder().level(2).build()).build(),
             Fish.builder().name("Bass").averageWeight(3.0).level(Level.builder().level(3).build()).build(),
             Fish.builder().name("Trout").averageWeight(1.0).level(Level.builder().level(1).build()).build(),
             Fish.builder().name("Grouper").averageWeight(4.0).level(Level.builder().level(5).build()).build(),
-            Fish.builder().name("Mahi-Mahi").averageWeight(7.0).level(Level.builder().level(6).build()).build()
+            Fish.builder().name("MahiMahi").averageWeight(7.0).level(Level.builder().level(6).build()).build()
     };
 
     public FishSeeder(FishRepository fishRepository, LevelRepository levelRepository) {

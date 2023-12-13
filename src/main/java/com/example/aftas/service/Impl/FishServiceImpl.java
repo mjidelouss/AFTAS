@@ -20,6 +20,11 @@ public class FishServiceImpl implements FishService {
     }
 
     @Override
+    public Fish getFishByName(String name) {
+        return fishRepository.findByName(name);
+    }
+
+    @Override
     public Fish addFish(Fish fish) {
         return fishRepository.save(fish);
     }

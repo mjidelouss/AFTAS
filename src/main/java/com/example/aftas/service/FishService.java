@@ -8,6 +8,8 @@ public interface FishService {
 
     Fish getFishById(Long id);
 
+    Fish getFishByName(String name);
+
     Fish addFish(Fish fish);
 
     Fish updateFish(Fish fish, Long id);

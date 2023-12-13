@@ -1,6 +1,8 @@
 package com.example.aftas.entities;
 
 import com.example.aftas.enums.CompetitionStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
@@ -57,5 +59,7 @@ public class Competition {
 
     @OneToMany(mappedBy = "competition")
     @Column(nullable = true)
+    @JsonIgnore
+    @ToString.Exclude
     private List<Rank> ranks;
 }

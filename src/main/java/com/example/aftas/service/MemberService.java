@@ -11,4 +11,6 @@ public interface MemberService {
     void deleteMember(Long id);
 
     List<Member> getMembers();
+
+    Member getMemberByMembershipNumber(Integer membershipNumber);
 }

@@ -1,5 +1,6 @@
 package com.example.aftas.errorHandler;
 
+import com.example.aftas.response.ResponseMessage;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,22 @@ public class ErrorHandler {
         Map<String, String> errors = new HashMap<>();
         errors.put("date", "Invalid date format");
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(OperationException.class)
+    public ResponseEntity<ResponseMessage> handleOperationException(OperationException ex) {
+
+        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+
+        return ResponseEntity.badRequest().body(responseMessage);
+    }
+
+    @ExceptionHandler(RessourceNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleResourceNotFoundException(RessourceNotFoundException ex) {
+
+        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+
+        return ResponseEntity.badRequest().body(responseMessage);
     }
 
 }

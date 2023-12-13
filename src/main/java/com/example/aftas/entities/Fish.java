@@ -1,5 +1,7 @@
 package com.example.aftas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +34,8 @@ public class Fish {
     private Double averageWeight;
 
     @OneToMany(mappedBy = "fish")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Hunt> hunts;
 
     @ManyToOne

@@ -11,14 +11,18 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Rank {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Positive(message = "Rank must be Positive")
+
+    public Rank() {
+        this.id = new RankId();
+    }
+
+    @EmbeddedId
+    private RankId id;
+
+    @PositiveOrZero(message = "Rank must be Positive")
     @NotNull(message = "Rank cannot be Null")
     @Column(columnDefinition = "integer default 0")
     private Integer rank;
@@ -30,11 +34,13 @@ public class Rank {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @MapsId("memberId")
     @NotNull(message = "Member cannot be Null")
     private Member member;
 
     @ManyToOne
     @JoinColumn(name = "competition_id")
+    @MapsId("competitionId")
     @NotNull(message = "Competition cannot be Null")
     private Competition competition;
 

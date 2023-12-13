@@ -1,13 +1,13 @@
 package com.example.aftas.entities;
 
 import com.example.aftas.enums.IdentityDocumentType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 @Entity
@@ -39,7 +39,7 @@ public class Member {
     @NotNull(message = "Access Date must not be Null")
     @PastOrPresent(message = "Access Date must be in the past or the present")
     @Temporal(TemporalType.DATE)
-    private Date accessDate;
+    private LocalDate accessDate;
 
     @NotNull(message = "Nationality must not be Null")
     @NotBlank(message = "Nationality Cannot be Blank")
@@ -58,9 +58,13 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     @Column(nullable = true)
+    @JsonIgnore
+    @ToString.Exclude
     private List<Rank> ranks;
 
     @OneToMany(mappedBy = "member")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Hunt> hunts;
 
 }

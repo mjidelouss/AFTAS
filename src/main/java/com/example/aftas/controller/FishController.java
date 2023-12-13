@@ -1,7 +1,9 @@
 package com.example.aftas.controller;
 
+import com.example.aftas.VMs.request.FishRequest;
 import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Fish;
+import com.example.aftas.mappers.FishMapper;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.FishService;
 import jakarta.validation.Valid;
@@ -37,8 +39,9 @@ public class FishController {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity addFish(@RequestBody @Valid Fish fish) {
+    @PostMapping()
+    public ResponseEntity addFish(@RequestBody @Valid FishRequest fishRequest) {
+        Fish fish = FishMapper.mapFishRequestToFish(fishRequest);
         Fish fish1 = fishService.addFish(fish);
         if(fish1 == null) {
             return ResponseMessage.badRequest("Failed To Add Fish");
@@ -48,7 +51,8 @@ public class FishController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateFish(@RequestBody Fish fish, @PathVariable Long id) {
+    public ResponseEntity updateFish(@RequestBody @Valid FishRequest fishRequest, @PathVariable Long id) {
+        Fish fish = FishMapper.mapFishRequestToFish(fishRequest);
         Fish fish1 = fishService.updateFish(fish, id);
         if (fish1 == null) {
             return ResponseMessage.badRequest("Fish Not Updated");

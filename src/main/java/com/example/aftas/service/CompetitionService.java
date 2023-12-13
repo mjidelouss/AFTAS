@@ -15,4 +15,6 @@ public interface CompetitionService {
     void deleteCompetition(Long id);
 
     List<Competition> getCompetitions();
+
+    Competition getCompetitionByCode(String competitionCode);
 }

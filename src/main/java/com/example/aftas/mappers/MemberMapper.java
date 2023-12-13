@@ -4,20 +4,34 @@ import com.example.aftas.VMs.request.MemberRequest;
 import com.example.aftas.VMs.response.MemberResponse;
 import com.example.aftas.entities.Member;
 
+import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class MemberMapper {
 
+    private static final int MAX_MEMBERSHIP_NUMBER = 9999;
+    private static AtomicInteger membershipCounter = new AtomicInteger(0);
     public static Member mapMemberRequestToMember(MemberRequest memberRequest) {
-        return new Member().builder()
+        return Member.builder()
                 .name(memberRequest.getName())
                 .familyName(memberRequest.getFamilyName())
                 .nationality(memberRequest.getNationality())
                 .identityNumber(memberRequest.getIdentityNumber())
                 .identityDocumentType(memberRequest.getIdentityDocumentType())
+                .accessDate(LocalDate.now())
+                .membershipNumber(generateUniqueMembershipNumber())
                 .build();
     }
 
+    public static Integer generateUniqueMembershipNumber() {
+        int currentNumber = membershipCounter.incrementAndGet();
+        if (currentNumber > MAX_MEMBERSHIP_NUMBER) {
+            membershipCounter.set(1);
+        }
+        return currentNumber;
+    }
     public static MemberResponse mapMemberToMemberResponse(Member member) {
-        return new MemberResponse().builder()
+        return MemberResponse.builder()
                 .membershipNumber(member.getMembershipNumber())
                 .name(member.getName())
                 .familyName(member.getFamilyName())

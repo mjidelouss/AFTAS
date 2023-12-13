@@ -11,4 +11,6 @@ import java.util.List;
 public interface CompetitionRepository extends JpaRepository<Competition, Long> {
 
     List<Competition> findByDate(LocalDate competitionDate);
+
+    Competition findByCode(String competitionCode);
 }
