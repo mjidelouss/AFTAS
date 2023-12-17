@@ -11,6 +11,7 @@ public class CompetitionMapper {
         return Competition.builder()
                 .amount(competitionRequest.getAmount())
                 .date(competitionRequest.getDate())
+                .code(competitionRequest.getCode())
                 .startTime(competitionRequest.getStartTime())
                 .endTime(competitionRequest.getEndTime())
                 .location(competitionRequest.getLocation())

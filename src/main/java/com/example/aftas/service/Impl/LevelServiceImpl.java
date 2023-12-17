@@ -19,6 +19,11 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
+    public Level getLevelByLevel(Integer level) {
+        return levelRepository.findByLevel(level);
+    }
+
+    @Override
     public Level addLevel(Level level) {
         validateLevel(level);
         return levelRepository.save(level);

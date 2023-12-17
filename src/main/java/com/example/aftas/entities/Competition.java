@@ -26,7 +26,6 @@ public class Competition {
     private Long id;
 
     @Column(unique = true)
-    @NotNull(message = "Code Cannot be Null")
     @NotBlank(message = "Code Cannot be Blank")
     private String code;
 

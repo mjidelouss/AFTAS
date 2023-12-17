@@ -1,8 +1,13 @@
 package com.example.aftas.controller;
 import com.example.aftas.VMs.request.RankRequest;
+import com.example.aftas.VMs.request.RegisterRequest;
+import com.example.aftas.entities.Competition;
+import com.example.aftas.entities.Member;
 import com.example.aftas.entities.Rank;
 import com.example.aftas.mappers.RankMapper;
 import com.example.aftas.response.ResponseMessage;
+import com.example.aftas.service.CompetitionService;
+import com.example.aftas.service.MemberService;
 import com.example.aftas.service.RankingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +22,8 @@ import java.util.List;
 public class RankingController {
 
     private final RankingService rankingService;
+    private final CompetitionService competitionService;
+    private final MemberService memberService;
 
     @GetMapping("")
     public ResponseEntity getRankings() {
@@ -36,6 +43,24 @@ public class RankingController {
             return ResponseMessage.badRequest("Failed To Create Ranking");
         } else {
             return ResponseMessage.created("Ranking Created Successfully", rank1);
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity registerMemberToComeptition(@RequestBody @Valid RegisterRequest registerRequest) {
+        Competition competition = competitionService.getCompetitionByCode(registerRequest.getCompetitionCode());
+        Member member = memberService.getMemberByMembershipNumber(registerRequest.getMembershipNumber());
+        if(competition == null) {
+            return ResponseMessage.badRequest("Competition Not Found");
+        }
+        if (member == null) {
+            return ResponseMessage.badRequest("Member Not Found");
+        }
+        Boolean bool = rankingService.registerMemberToCompetition(member, competition);
+        if (bool) {
+            return ResponseMessage.created("Member Register Successfully", member);
+        } else {
+            return ResponseMessage.badRequest("Failed To Register Member");
         }
     }
 }

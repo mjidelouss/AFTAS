@@ -41,7 +41,7 @@ public class RankingServiceImpl implements RankingService {
         addRanking(rank);
     }
 
-    private void updateRankingOrder(Competition competition) {
+    public void updateRankingOrder(Competition competition) {
         List<Rank> ranks = rankingRepository.findByCompetitionOrderByScoreDesc(competition);
 
         for (int i = 0; i < ranks.size(); i++) {
@@ -55,7 +55,7 @@ public class RankingServiceImpl implements RankingService {
         return rankingRepository.findTop3ByCompetitionOrderByRank(competition);
     }
 
-    public void registerMemberToCompetition(Member member, Competition competition) {
+    public Boolean registerMemberToCompetition(Member member, Competition competition) {
         // Check if the member is already registered for the competition
         Rank existingRank = rankingRepository.findByMemberAndCompetition(member, competition);
         if (existingRank == null) {
@@ -66,6 +66,7 @@ public class RankingServiceImpl implements RankingService {
             newRank.setScore(0);
             newRank.setRank(0);
             rankingRepository.save(newRank);
+            return true;
         } else {
             throw new IllegalStateException("Member is already registered for the competition");
         }

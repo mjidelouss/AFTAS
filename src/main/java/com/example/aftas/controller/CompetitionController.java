@@ -1,6 +1,7 @@
 package com.example.aftas.controller;
 
 import com.example.aftas.VMs.request.CompetitionRequest;
+import com.example.aftas.VMs.request.RegisterRequest;
 import com.example.aftas.entities.Competition;
 import com.example.aftas.mappers.CompetitionMapper;
 import com.example.aftas.response.ResponseMessage;

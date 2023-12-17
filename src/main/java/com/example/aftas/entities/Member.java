@@ -53,7 +53,7 @@ public class Member {
     @NotNull(message = "Identity Number must not be Null")
     @NotBlank(message = "Identity Number Cannot be Blank")
     @Column(unique = true)
-    @Size(min = 3, max =40, message = "Identity Number must be Between 3 and 4O Characters")
+    @Size(min = 3, max =40, message = "Identity Number must be Between 7 and 20 Characters")
     private String identityNumber;
 
     @OneToMany(mappedBy = "member")

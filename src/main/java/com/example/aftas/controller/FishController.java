@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FishController {
     private final FishService fishService;
+    private final FishMapper fishMapper;
 
     @GetMapping("")
     public ResponseEntity getFishes() {
@@ -41,7 +42,7 @@ public class FishController {
 
     @PostMapping()
     public ResponseEntity addFish(@RequestBody @Valid FishRequest fishRequest) {
-        Fish fish = FishMapper.mapFishRequestToFish(fishRequest);
+        Fish fish = fishMapper.mapFishRequestToFish(fishRequest);
         Fish fish1 = fishService.addFish(fish);
         if(fish1 == null) {
             return ResponseMessage.badRequest("Failed To Add Fish");
@@ -52,7 +53,7 @@ public class FishController {
 
     @PutMapping("/{id}")
     public ResponseEntity updateFish(@RequestBody @Valid FishRequest fishRequest, @PathVariable Long id) {
-        Fish fish = FishMapper.mapFishRequestToFish(fishRequest);
+        Fish fish = fishMapper.mapFishRequestToFish(fishRequest);
         Fish fish1 = fishService.updateFish(fish, id);
         if (fish1 == null) {
             return ResponseMessage.badRequest("Fish Not Updated");

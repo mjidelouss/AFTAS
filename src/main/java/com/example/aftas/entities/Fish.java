@@ -38,7 +38,8 @@ public class Fish {
     @ToString.Exclude
     private List<Hunt> hunts;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "level_id")
     @NotNull(message = "Level Cannot Be Null")
     private Level level;
 }

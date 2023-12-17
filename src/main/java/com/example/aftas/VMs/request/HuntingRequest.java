@@ -1,8 +1,5 @@
 package com.example.aftas.VMs.request;
 
-import com.example.aftas.entities.Competition;
-import com.example.aftas.entities.Fish;
-import com.example.aftas.entities.Member;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;

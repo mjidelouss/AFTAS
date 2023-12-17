@@ -19,5 +19,5 @@ public class FishRequest {
     private Double averageWeight;
 
     @NotNull(message = "Level Cannot Be Null")
-    private Level level;
+    private Integer level;
 }

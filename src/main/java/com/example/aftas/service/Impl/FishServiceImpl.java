@@ -1,8 +1,11 @@
 package com.example.aftas.service.Impl;
 
 import com.example.aftas.entities.Fish;
+import com.example.aftas.entities.Level;
 import com.example.aftas.repository.FishRepository;
 import com.example.aftas.service.FishService;
+import com.example.aftas.service.LevelService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import java.util.List;
 public class FishServiceImpl implements FishService {
 
     private final FishRepository fishRepository;
+    private final LevelService levelService;
 
     @Override
     public Fish getFishById(Long id) {

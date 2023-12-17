@@ -12,6 +12,9 @@ import java.time.LocalTime;
 
 @Data
 public class CompetitionRequest {
+    @NotNull(message = "Code Cannot Be Null")
+    private String code;
+
     @NotNull(message = "Date Cannot Be Null")
     @Future(message = "Date Must Be in the Future")
     private LocalDate date;
