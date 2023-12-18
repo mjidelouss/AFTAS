@@ -1,4 +1,6 @@
 package com.example.aftas.controller;
+import com.example.aftas.VMs.request.CompetitionRequest;
+import com.example.aftas.VMs.request.PodiumRequest;
 import com.example.aftas.VMs.request.RankRequest;
 import com.example.aftas.VMs.request.RegisterRequest;
 import com.example.aftas.entities.Competition;
@@ -61,6 +63,18 @@ public class RankingController {
             return ResponseMessage.created("Member Register Successfully", member);
         } else {
             return ResponseMessage.badRequest("Failed To Register Member");
+        }
+    }
+
+    @PostMapping("/podium")
+    public ResponseEntity getPodium(@RequestBody @Valid PodiumRequest podiumRequest) {
+        Competition competition = competitionService.getCompetitionByCode(podiumRequest.getCode());
+        rankingService.updateRankingOrder(competition);
+        List<Rank> ranks = rankingService.getPodium(competition);
+        if (ranks.isEmpty()) {
+            return ResponseMessage.notFound("Ranks Not Found");
+        } else {
+            return ResponseMessage.ok("Top 3 Fetched Successfully", ranks);
         }
     }
 }
