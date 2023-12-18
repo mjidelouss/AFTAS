@@ -1,6 +1,7 @@
 package com.example.aftas.service;
 
 import com.example.aftas.entities.Competition;
+import com.example.aftas.enums.CompetitionStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,4 +20,6 @@ public interface CompetitionService {
     Page<Competition> getCompetitions(Pageable pageable);
 
     Competition getCompetitionByCode(String competitionCode);
+
+    List<Competition> getCompetitionsByStatus(CompetitionStatus status);
 }

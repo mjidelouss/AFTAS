@@ -2,6 +2,7 @@ package com.example.aftas.service.Impl;
 
 import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Member;
+import com.example.aftas.enums.CompetitionStatus;
 import com.example.aftas.repository.CompetitionRepository;
 import com.example.aftas.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +55,11 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Override
     public Page<Competition> getCompetitions(Pageable pageable) {
         return competitionRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Competition> getCompetitionsByStatus(CompetitionStatus status) {
+        return competitionRepository.findByStatus(status);
     }
 
     @Override

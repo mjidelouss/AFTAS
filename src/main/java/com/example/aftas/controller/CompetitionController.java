@@ -3,6 +3,7 @@ package com.example.aftas.controller;
 import com.example.aftas.VMs.request.CompetitionRequest;
 import com.example.aftas.VMs.request.RegisterRequest;
 import com.example.aftas.entities.Competition;
+import com.example.aftas.enums.CompetitionStatus;
 import com.example.aftas.mappers.CompetitionMapper;
 import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
@@ -32,6 +33,12 @@ public class CompetitionController {
         } else {
             return ResponseMessage.ok("Success", competitionsPage.getContent());
         }
+    }
+
+    @GetMapping("/byStatus/{status}")
+    public ResponseEntity getCompetitionsByStatus(@PathVariable CompetitionStatus status) {
+        List<Competition> competitions = competitionService.getCompetitionsByStatus(status);
+        return ResponseMessage.ok("Successfully Got Competitions", competitions);
     }
 
     @GetMapping("/{id}")
