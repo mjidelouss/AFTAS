@@ -8,6 +8,8 @@ import com.example.aftas.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +23,14 @@ public class CompetitionController {
     private final CompetitionService competitionService;
 
     @GetMapping("")
-    public ResponseEntity getCompetitions() {
-        List<Competition> competitions = competitionService.getCompetitions();
-        if (competitions.isEmpty()) {
+    public ResponseEntity getCompetitions(@RequestParam(defaultValue = "0") int page,
+                                          @RequestParam(defaultValue = "5") int size) {
+        Page<Competition> competitionsPage = competitionService.getCompetitions(PageRequest.of(page, size));
+
+        if (competitionsPage.isEmpty()) {
             return ResponseMessage.notFound("Competitions Not Found");
         } else {
-            return ResponseMessage.ok("Success", competitions);
+            return ResponseMessage.ok("Success", competitionsPage.getContent());
         }
     }
 

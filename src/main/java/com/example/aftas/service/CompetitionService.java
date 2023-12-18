@@ -1,6 +1,8 @@
 package com.example.aftas.service;
 
 import com.example.aftas.entities.Competition;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public interface CompetitionService {
 
     void deleteCompetition(Long id);
 
-    List<Competition> getCompetitions();
+    Page<Competition> getCompetitions(Pageable pageable);
 
     Competition getCompetitionByCode(String competitionCode);
 }

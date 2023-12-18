@@ -5,6 +5,8 @@ import com.example.aftas.entities.Member;
 import com.example.aftas.repository.CompetitionRepository;
 import com.example.aftas.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -50,8 +52,8 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public List<Competition> getCompetitions() {
-        return competitionRepository.findAll();
+    public Page<Competition> getCompetitions(Pageable pageable) {
+        return competitionRepository.findAll(pageable);
     }
 
     @Override
