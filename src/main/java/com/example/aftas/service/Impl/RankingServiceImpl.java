@@ -4,6 +4,7 @@ import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Member;
 import com.example.aftas.entities.Rank;
+import com.example.aftas.enums.CompetitionStatus;
 import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
@@ -52,14 +53,13 @@ public class RankingServiceImpl implements RankingService {
     }
 
     public List<Rank> getPodium(Competition competition) {
+        competition.setStatus(CompetitionStatus.CLOSED);
         return rankingRepository.findTop3ByCompetitionOrderByRank(competition);
     }
 
     public Boolean registerMemberToCompetition(Member member, Competition competition) {
-        // Check if the member is already registered for the competition
         Rank existingRank = rankingRepository.findByMemberAndCompetition(member, competition);
         if (existingRank == null) {
-            // Create a new Rank for the member and the competition
             Rank newRank = new Rank();
             newRank.setMember(member);
             newRank.setCompetition(competition);

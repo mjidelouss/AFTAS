@@ -1,6 +1,5 @@
 package com.example.aftas.VMs.request;
 
-import com.example.aftas.enums.CompetitionStatus;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +11,6 @@ import java.time.LocalTime;
 
 @Data
 public class CompetitionRequest {
-    @NotNull(message = "Code Cannot Be Null")
     private String code;
 
     @NotNull(message = "Date Cannot Be Null")

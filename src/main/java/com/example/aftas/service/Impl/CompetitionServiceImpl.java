@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     public Competition addCompetition(Competition competition) {
         competition.setCode(generateCompetitionCode(competition));
         validateCompetitionDate(competition.getDate());
+        validateCompetitionTime(competition.getStartTime(), competition.getEndTime());
         return competitionRepository.save(competition);
     }
 
@@ -75,13 +77,19 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     public void validateCompetitionDate(LocalDate competitionDate) {
         LocalDate today = LocalDate.now();
-        Duration timeUntilCompetition = Duration.between(LocalDateTime.now(), competitionDate.atStartOfDay());
+        Duration timeUntilCompetition = Duration.between(today, competitionDate.atStartOfDay());
         if (timeUntilCompetition.isNegative() || timeUntilCompetition.minusHours(48).isNegative()) {
             throw new IllegalArgumentException("Competition date must be at least 48 hours from now");
         }
         List<Competition> existingCompetitionsOnDate = competitionRepository.findByDate(competitionDate);
         if (!existingCompetitionsOnDate.isEmpty()) {
             throw new IllegalArgumentException("Another competition already exists on the same date");
+        }
+    }
+
+    public void validateCompetitionTime(LocalTime startTime, LocalTime endTime) {
+        if (startTime.isAfter(endTime)) {
+            throw new IllegalArgumentException("Start time must be before the end time");
         }
     }
 

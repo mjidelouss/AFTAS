@@ -1,6 +1,7 @@
 package com.example.aftas.service.Impl;
 
 import com.example.aftas.entities.*;
+import com.example.aftas.enums.CompetitionStatus;
 import com.example.aftas.repository.HuntingRepository;
 import com.example.aftas.service.HuntingService;
 import com.example.aftas.service.RankingService;
@@ -26,13 +27,17 @@ public class HuntingServiceImpl implements HuntingService {
         String fishName = hunt.getFish().getName();
         Hunt existingHunt = huntingRepository.findByFish_NameAndMember_Id(fishName, hunt.getMember().getId());
         validateFishWeight(hunt, huntedWeight);
-        if (existingHunt != null) {
-            existingHunt.setNumberOfFish(existingHunt.getNumberOfFish() + hunt.getNumberOfFish());
-            huntingRepository.save(existingHunt);
+        if (hunt.getCompetition().getStatus() == CompetitionStatus.IN_PROGRESS) {
+            if (existingHunt != null) {
+                existingHunt.setNumberOfFish(existingHunt.getNumberOfFish() + hunt.getNumberOfFish());
+                huntingRepository.save(existingHunt);
+            } else {
+                huntingRepository.save(hunt);
+            }
+            rankingService.updateScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish());
         } else {
-            huntingRepository.save(hunt);
+            throw new IllegalStateException("Cannot save hunt when the competition is not in progress");
         }
-        rankingService.updateScore(hunt.getMember(), hunt.getCompetition(), hunt.getFish());
         return hunt;
     }
 
