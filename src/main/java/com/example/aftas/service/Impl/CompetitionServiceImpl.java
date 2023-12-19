@@ -1,7 +1,6 @@
 package com.example.aftas.service.Impl;
 
 import com.example.aftas.entities.Competition;
-import com.example.aftas.entities.Member;
 import com.example.aftas.enums.CompetitionStatus;
 import com.example.aftas.repository.CompetitionRepository;
 import com.example.aftas.service.CompetitionService;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

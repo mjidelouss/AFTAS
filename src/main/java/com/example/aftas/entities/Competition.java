@@ -61,4 +61,15 @@ public class Competition {
     @JsonIgnore
     @ToString.Exclude
     private List<Rank> ranks;
+
+    public Competition(String code, LocalDate date, LocalTime startTime, LocalTime endTime, Integer totalParticipants, String location, Double amount, CompetitionStatus status) {
+        this.code = code;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.totalParticipants = totalParticipants;
+        this.location = location;
+        this.amount = amount;
+        this.status = status;
+    }
 }

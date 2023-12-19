@@ -1,6 +1,6 @@
 package com.example.aftas.controller;
 
-import com.example.aftas.VMs.request.HuntingRequest;
+import com.example.aftas.Dtos.request.HuntingRequest;
 import com.example.aftas.entities.Hunt;
 import com.example.aftas.mappers.HuntMapper;
 import com.example.aftas.response.ResponseMessage;

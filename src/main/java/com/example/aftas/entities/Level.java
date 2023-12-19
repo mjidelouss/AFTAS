@@ -37,4 +37,10 @@ public class Level {
     @JsonIgnore
     @ToString.Exclude
     private List<Fish> fishList;
+
+    public Level(Integer level, String description, Integer points) {
+        this.level = level;
+        this.description = description;
+        this.points = points;
+    }
 }

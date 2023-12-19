@@ -1,7 +1,6 @@
 package com.example.aftas.mappers;
 
-import com.example.aftas.VMs.request.FishRequest;
-import com.example.aftas.VMs.response.FishResponse;
+import com.example.aftas.Dtos.request.FishRequest;
 import com.example.aftas.entities.Fish;
 import com.example.aftas.service.LevelService;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +17,6 @@ public class FishMapper {
                 .name(fishRequest.getName())
                 .averageWeight(fishRequest.getAverageWeight())
                 .level(levelService.getLevelByLevel(fishRequest.getLevel()))
-                .build();
-    }
-
-    public static FishResponse mapFishToFishResponse(Fish fish) {
-        return FishResponse.builder()
-                .name(fish.getName())
-                .averageWeight(fish.getAverageWeight())
-                .level(fish.getLevel())
                 .build();
     }
 }

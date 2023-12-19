@@ -2,14 +2,12 @@ package com.example.aftas.entities;
 
 import com.example.aftas.enums.IdentityDocumentType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -67,4 +65,13 @@ public class Member {
     @ToString.Exclude
     private List<Hunt> hunts;
 
+    public Member(String name, String familyName, Integer membershipNumber, LocalDate accessDate, String nationality, IdentityDocumentType identityDocumentType, String identityNumber) {
+        this.name = name;
+        this.familyName = familyName;
+        this.membershipNumber = membershipNumber;
+        this.accessDate = accessDate;
+        this.nationality = nationality;
+        this.identityDocumentType = identityDocumentType;
+        this.identityNumber = identityNumber;
+    }
 }

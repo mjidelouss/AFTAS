@@ -42,4 +42,10 @@ public class Fish {
     @JoinColumn(name = "level_id")
     @NotNull(message = "Level Cannot Be Null")
     private Level level;
+
+    public Fish(String name, Double averageWeight, Level level) {
+        this.name = name;
+        this.averageWeight = averageWeight;
+        this.level = level;
+    }
 }

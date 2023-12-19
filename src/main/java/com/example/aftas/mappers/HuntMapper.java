@@ -1,7 +1,6 @@
 package com.example.aftas.mappers;
 
-import com.example.aftas.VMs.request.HuntingRequest;
-import com.example.aftas.VMs.response.HuntingResponse;
+import com.example.aftas.Dtos.request.HuntingRequest;
 import com.example.aftas.entities.Hunt;
 import com.example.aftas.service.CompetitionService;
 import com.example.aftas.service.FishService;
@@ -22,15 +21,6 @@ public class HuntMapper {
                 .fish(fishService.getFishByName(huntingRequest.getFishName()))
                 .member(memberService.getMemberByMembershipNumber(huntingRequest.getMembershipNumber()))
                 .competition(competitionService.getCompetitionByCode(huntingRequest.getCompetitionCode()))
-                .build();
-    }
-
-    public HuntingResponse mapHuntToHuntResponse(Hunt hunt) {
-        return HuntingResponse.builder()
-                .numberOfFish(hunt.getNumberOfFish())
-                .member(hunt.getMember())
-                .competition(hunt.getCompetition())
-                .fish(hunt.getFish())
                 .build();
     }
 }

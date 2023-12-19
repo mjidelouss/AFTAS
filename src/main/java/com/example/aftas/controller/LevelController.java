@@ -1,7 +1,6 @@
 package com.example.aftas.controller;
 
-import com.example.aftas.VMs.request.LevelRequest;
-import com.example.aftas.entities.Fish;
+import com.example.aftas.Dtos.request.LevelRequest;
 import com.example.aftas.entities.Level;
 import com.example.aftas.mappers.LevelMapper;
 import com.example.aftas.response.ResponseMessage;

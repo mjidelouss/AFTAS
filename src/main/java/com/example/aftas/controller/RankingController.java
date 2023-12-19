@@ -1,8 +1,7 @@
 package com.example.aftas.controller;
-import com.example.aftas.VMs.request.CompetitionRequest;
-import com.example.aftas.VMs.request.PodiumRequest;
-import com.example.aftas.VMs.request.RankRequest;
-import com.example.aftas.VMs.request.RegisterRequest;
+import com.example.aftas.Dtos.request.PodiumRequest;
+import com.example.aftas.Dtos.request.RankRequest;
+import com.example.aftas.Dtos.request.RegisterRequest;
 import com.example.aftas.entities.Competition;
 import com.example.aftas.entities.Member;
 import com.example.aftas.entities.Rank;

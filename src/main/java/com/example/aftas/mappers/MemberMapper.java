@@ -1,7 +1,6 @@
 package com.example.aftas.mappers;
 
-import com.example.aftas.VMs.request.MemberRequest;
-import com.example.aftas.VMs.response.MemberResponse;
+import com.example.aftas.Dtos.request.MemberRequest;
 import com.example.aftas.entities.Member;
 
 import java.time.LocalDate;
@@ -29,13 +28,5 @@ public class MemberMapper {
             membershipCounter.set(1);
         }
         return currentNumber;
-    }
-    public static MemberResponse mapMemberToMemberResponse(Member member) {
-        return MemberResponse.builder()
-                .membershipNumber(member.getMembershipNumber())
-                .name(member.getName())
-                .familyName(member.getFamilyName())
-                .nationality(member.getNationality())
-                .build();
     }
 }

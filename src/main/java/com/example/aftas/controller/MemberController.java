@@ -1,7 +1,6 @@
 package com.example.aftas.controller;
 
-import com.example.aftas.VMs.request.MemberRequest;
-import com.example.aftas.entities.Fish;
+import com.example.aftas.Dtos.request.MemberRequest;
 import com.example.aftas.entities.Member;
 import com.example.aftas.mappers.MemberMapper;
 import com.example.aftas.response.ResponseMessage;
