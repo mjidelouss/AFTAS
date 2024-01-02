@@ -23,8 +23,7 @@ public class CompetitionController {
     private final CompetitionService competitionService;
 
     @GetMapping("")
-    public ResponseEntity getCompetitions(@RequestParam(defaultValue = "0") int page,
-                                          @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity getCompetitions(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Page<Competition> competitionsPage = competitionService.getCompetitions(PageRequest.of(page, size));
 
         if (competitionsPage.isEmpty()) {

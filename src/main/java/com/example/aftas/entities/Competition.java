@@ -2,9 +2,7 @@ package com.example.aftas.entities;
 
 import com.example.aftas.enums.CompetitionStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -31,7 +29,6 @@ public class Competition {
 
     @Column(unique = true)
     @NotNull(message = "Date Cannot Be Null")
-    @Future(message = "Date Must Be in the Future")
     private LocalDate date;
 
     @NotNull(message = "Start Time Cannot be Null")

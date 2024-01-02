@@ -6,16 +6,17 @@ import com.example.aftas.enums.IdentityDocumentType;
 import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.RankingService;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class RankingServiceImplTest {
@@ -36,6 +37,7 @@ class RankingServiceImplTest {
         Mockito.when(rankingRepository.findByMemberAndCompetition(member, competition)).thenReturn(rank);
         rankingService.updateScore(member, competition, fish);
         Mockito.verify(rankingRepository).save(Mockito.any(Rank.class));
+        assertTrue(rank.getScore() > 0, "Score should be updated");
     }
 
     @Test
@@ -52,6 +54,9 @@ class RankingServiceImplTest {
         Mockito.when(rankingRepository.findByCompetitionOrderByScoreDesc(competition)).thenReturn(ranks);
         rankingService.updateRankingOrder(competition);
         Mockito.verify(rankingRepository, Mockito.times(ranks.size())).save(Mockito.any(Rank.class));
+        assertEquals(1, ranks.get(0).getRank(), "Rank 1 should have the highest score");
+        assertEquals(2, ranks.get(1).getRank(), "Rank 2 should have the second-highest score");
+        assertEquals(3, ranks.get(2).getRank(), "Rank 3 should have the third-highest score");
     }
 
     @Test
@@ -68,5 +73,11 @@ class RankingServiceImplTest {
         Mockito.when(rankingRepository.findByCompetitionOrderByScoreDesc(competition)).thenReturn(ranks);
         rankingService.updateRankingOrder(competition);
         Mockito.verify(rankingRepository, Mockito.times(ranks.size())).save(Mockito.any(Rank.class));
+
+        assertEquals(1, ranks.get(0).getRank(), "Rank 1 should have the highest score");
+        assertEquals(2, ranks.get(1).getRank(), "Rank 2 should have the second-highest score");
+        assertEquals(3, ranks.get(2).getRank(), "Rank 3 should have the third-highest score");
+
+        assertTrue(ranks.get(1).getScore() > ranks.get(2).getScore(), "Rank 2 should have a higher score than Rank 3");
     }
 }

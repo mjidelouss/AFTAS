@@ -5,6 +5,7 @@ import com.example.aftas.entities.Fish;
 import com.example.aftas.entities.Member;
 import com.example.aftas.entities.Rank;
 import com.example.aftas.enums.CompetitionStatus;
+import com.example.aftas.repository.CompetitionRepository;
 import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
+    private final CompetitionRepository competitionRepository;
 
     @Override
     public Rank addRanking(Rank rank) {
@@ -54,6 +56,7 @@ public class RankingServiceImpl implements RankingService {
 
     public List<Rank> getPodium(Competition competition) {
         competition.setStatus(CompetitionStatus.CLOSED);
+        competitionRepository.save(competition);
         return rankingRepository.findTop3ByCompetitionOrderByRank(competition);
     }
 

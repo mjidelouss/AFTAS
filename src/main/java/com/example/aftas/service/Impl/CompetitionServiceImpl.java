@@ -5,6 +5,7 @@ import com.example.aftas.enums.CompetitionStatus;
 import com.example.aftas.repository.CompetitionRepository;
 import com.example.aftas.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -75,8 +76,9 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     public void validateCompetitionDate(LocalDate competitionDate) {
         LocalDate today = LocalDate.now();
-        Duration timeUntilCompetition = Duration.between(today, competitionDate.atStartOfDay());
-        if (timeUntilCompetition.isNegative() || timeUntilCompetition.minusHours(48).isNegative()) {
+        Duration timeUntilCompetition = Duration.between(today.atStartOfDay(), competitionDate.atStartOfDay());
+
+        if (timeUntilCompetition.isNegative() || timeUntilCompetition.toHours() < 48) {
             throw new IllegalArgumentException("Competition date must be at least 48 hours from now");
         }
         List<Competition> existingCompetitionsOnDate = competitionRepository.findByDate(competitionDate);
@@ -84,7 +86,6 @@ public class CompetitionServiceImpl implements CompetitionService {
             throw new IllegalArgumentException("Another competition already exists on the same date");
         }
     }
-
     public void validateCompetitionTime(LocalTime startTime, LocalTime endTime) {
         if (startTime.isAfter(endTime)) {
             throw new IllegalArgumentException("Start time must be before the end time");
